@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 @Repository
 public class CheckLoginRepository implements ICheckLoginRepository {
+
+
+
     @Override
     public User checkLogin(Login login) {
         ArrayList<User> users = new ArrayList<>();
