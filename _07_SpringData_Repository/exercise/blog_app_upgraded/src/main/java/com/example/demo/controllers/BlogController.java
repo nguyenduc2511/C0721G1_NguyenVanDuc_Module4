@@ -29,7 +29,7 @@ public class BlogController {
     private ICatelogyService iCatelogyService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView showList(@PageableDefault(value = 5, sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable) {
+    public ModelAndView showList(@PageableDefault(value = 3, sort = "createdDate", direction = Sort.Direction.DESC) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("blog/list");
         modelAndView.addObject("blogList", iBlogService.findAll(pageable));
         modelAndView.addObject("catelogyList", iCatelogyService.findAll());
