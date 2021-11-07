@@ -22,10 +22,12 @@ public class RegisterFormController {
     @Autowired
     private IRegisterFormService iRegisterFormService;
 
+
     @GetMapping("/")
     public ModelAndView showForm() {
         return new ModelAndView("create", "registerFormDTO", new RegisterFormDTO());
     }
+
 
     @PostMapping("/create")
     public String checkValidation(@Valid @ModelAttribute RegisterFormDTO registerFormDTO, BindingResult bindingResult, Model model) {
