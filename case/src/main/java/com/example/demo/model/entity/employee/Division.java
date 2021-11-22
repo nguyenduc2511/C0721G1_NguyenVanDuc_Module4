@@ -1,10 +1,7 @@
 package com.example.demo.model.entity.employee;
 
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Division {
@@ -14,5 +11,38 @@ public class Division {
     private Integer divisionId;
     private String divisionName;
 
+    @OneToMany(mappedBy = "division")
+    private List<Employee> employees;
 
+    public Division() {
+    }
+
+    public Division(String divisionName, List<Employee> employees) {
+        this.divisionName = divisionName;
+        this.employees = employees;
+    }
+
+    public Integer getDivisionId() {
+        return divisionId;
+    }
+
+    public void setDivisionId(Integer divisionId) {
+        this.divisionId = divisionId;
+    }
+
+    public String getDivisionName() {
+        return divisionName;
+    }
+
+    public void setDivisionName(String divisionName) {
+        this.divisionName = divisionName;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
 }

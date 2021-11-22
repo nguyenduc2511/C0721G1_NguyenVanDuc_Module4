@@ -1,60 +1,47 @@
-package com.example.demo.model.entity.employee;
+package com.example.demo.dto;
 
 import com.example.demo.model.entity.contract.Contract;
-import com.example.demo.model.entity.security.User;
+import com.example.demo.model.entity.employee.Division;
+import com.example.demo.model.entity.employee.EducationDegree;
+import com.example.demo.model.entity.employee.Position;
 
-import javax.persistence.*;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
-@Entity
-public class Employee {
+public class EmployeeDto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer employeeId;
+    @NotBlank(message = "Please fill in.")
     private String employeeName;
+    @NotBlank(message = "Please fill in.")
+    @Pattern(regexp = "^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-]\\d{4}$", message = "Invalid input.")
     private String dayOfBirth;
+    @Pattern(regexp = "^\\d{9}|\\d{12}$", message = "Invalid ID Card Format.")
     private String employeeIdCard;
+    @Min(value = 1, message = "Positive number input only.")
     private double employeeSalary;
+    @Pattern(regexp = "^090\\d{7}|\\(84\\)\\+90\\d{7}|091\\d{7}|\\(84\\)\\+91\\d{7}$",message = "Invalid phone number format.")
     private String employeePhone;
+    @NotBlank(message = "Please fill in.")
+    @Email(message = "Invalid email format.")
     private String employeeEmail;
+    @NotBlank(message = "Please fill in.")
     private String employeeAddress;
-
-    @ManyToOne(targetEntity = Position.class)
-    @JoinColumn(name = "position_id", referencedColumnName = "positionId")
     private Position position;
-
-    @ManyToOne(targetEntity = EducationDegree.class)
-    @JoinColumn(name = "education_degree_id", referencedColumnName = "educationDegreeId")
     private EducationDegree educationDegree;
-
-    @ManyToOne(targetEntity = Division.class)
-    @JoinColumn(name = "division_id", referencedColumnName = "divisionId")
     private Division division;
-
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private List<Contract> contracts;
 
-    @ManyToOne(targetEntity = User.class)
-    @JoinColumn(name = "username", referencedColumnName = "username")
-    private User user;
-
-    public Employee() {
-    }
-
-    public Employee(String employeeName, String dayOfBirth, String employeeIdCard, double employeeSalary, String employeePhone, String employeeEmail, String employeeAddress, Position position, EducationDegree educationDegree, Division division, List<Contract> contracts, User user) {
-        this.employeeName = employeeName;
-        this.dayOfBirth = dayOfBirth;
-        this.employeeIdCard = employeeIdCard;
-        this.employeeSalary = employeeSalary;
-        this.employeePhone = employeePhone;
-        this.employeeEmail = employeeEmail;
-        this.employeeAddress = employeeAddress;
-        this.position = position;
-        this.educationDegree = educationDegree;
-        this.division = division;
-        this.contracts = contracts;
-        this.user = user;
+    public EmployeeDto() {
     }
 
     public Integer getEmployeeId() {
@@ -153,11 +140,4 @@ public class Employee {
         this.contracts = contracts;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }
