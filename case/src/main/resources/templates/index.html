@@ -27,12 +27,12 @@
 </head>
 <body>
 
-<div data-include="body/navbar.html"></div>
+<div th:replace="/body/navbar" > </div>
 
 <div class="container-fluid px-0">
     <div class="row p-0">
         <div class="col-lg-3 col-sm-12">
-            <div data-include="body/leftbody.html"></div>
+            <div th:replace="/body/leftbody"></div>
         </div>
 
         <div class="col-lg-9 col-sm-12">
@@ -90,9 +90,9 @@
 </body>
 <script src="../static/assert/jquery/jquery-3.5.1.min.js"></script>
 <script src="../static/assert/jquery/jquery-3.5.1.min.js"></script>
-<script src="/assert/bootstrap413/js/popper.min.js"></script>
-<script src="/assert/datatables/js/jquery.dataTables.min.js"></script>
-<script src="/assert/datatables/js/dataTables.bootstrap4.min.js"></script>
-<script src="/assert/bootstrap413/js/bootstrap.min.js"></script>
-<script src="/assert/bootstrap413/js/bootstrap.bundle.js"></script>
+<script src="../static/assert/bootstrap413/js/popper.min.js"></script>
+<script src="../static/assert/datatables/js/jquery.dataTables.min.js"></script>
+<script src="../static/assert/datatables/js/dataTables.bootstrap4.min.js"></script>
+<script src="../static/assert/bootstrap413/js/bootstrap.min.js"></script>
+<script src="../static/assert/bootstrap413/js/bootstrap.bundle.js"></script>
 </html>

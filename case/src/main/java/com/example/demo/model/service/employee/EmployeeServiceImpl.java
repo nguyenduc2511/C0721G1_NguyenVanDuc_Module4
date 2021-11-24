@@ -55,4 +55,5 @@ public class EmployeeServiceImpl implements IEmployeeService{
     public Page<Employee> findAllByEmployeeNameContainingAndPosition_PositionName(Pageable pageable, String name, String positionName) {
         return this.iEmployeeRepository.findAllByEmployeeNameContainingAndPosition_PositionName(pageable,"%" + name + "%","%" +positionName+ "%");
     }
+
 }

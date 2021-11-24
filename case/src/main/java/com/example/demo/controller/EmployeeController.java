@@ -39,22 +39,40 @@ public class EmployeeController {
     @Autowired
     private IUserService iUserService;
 
-    @GetMapping(value = {"/list", ""})
-    public ModelAndView showList(@PageableDefault(value = 5, sort = "employee_id", direction = Sort.Direction.ASC) Pageable pageable,
-                                 @RequestParam Optional<String> employeeName,
-                                 @RequestParam Optional<String> positionName) {
+//    @GetMapping(value = {"/list",""})
+//    public ModelAndView showList(@PageableDefault(size = 3) Pageable pageable,
+//                                 @RequestParam Optional<String> employeeName,
+//                                 @RequestParam Optional<String> positionName) {
+//        ModelAndView modelAndView = new ModelAndView("employee/list");
+////        Page<Employee> employees = this.iEmployeeService.findAllByEmployeeNameContainingAndPosition_PositionName(pageable, employeeName.orElse(""), positionName.orElse(""));
+//        Page<Employee> employees = this.iEmployeeService.findAll(pageable);
+//
+////        modelAndView.addObject("employeeList", employees);
+//        modelAndView.addObject("employeeList", employees);
+//        modelAndView.addObject("positionList", iPositionService.findAll());
+//        modelAndView.addObject("employeeName", employeeName.orElse(""));
+//        modelAndView.addObject("position", positionName.orElse(""));
+//        if (employees.isEmpty()) {
+//            modelAndView.addObject("message", "No data");
+//        }
+//        return modelAndView;
+//    }
+
+    @GetMapping(value = {"/list",""})
+    public ModelAndView showList(@PageableDefault(size = 3) Pageable pageable)
+                                 {
         ModelAndView modelAndView = new ModelAndView("employee/list");
-        Page<Employee> employees = this.iEmployeeService.findAllByEmployeeNameContainingAndPosition_PositionName(pageable, employeeName.orElse(""), positionName.orElse(""));
+//        Page<Employee> employees = this.iEmployeeService.findAllByEmployeeNameContainingAndPosition_PositionName(pageable, employeeName.orElse(""), positionName.orElse(""));
+        Page<Employee> employees = this.iEmployeeService.findAll(pageable);
+
+//        modelAndView.addObject("employeeList", employees);
         modelAndView.addObject("employeeList", employees);
         modelAndView.addObject("positionList", iPositionService.findAll());
-        modelAndView.addObject("employeeName", employeeName.orElse(""));
-        modelAndView.addObject("position", positionName.orElse(""));
         if (employees.isEmpty()) {
             modelAndView.addObject("message", "No data");
         }
         return modelAndView;
     }
-
     @GetMapping("/create")
     public ModelAndView showCreateForm() {
         ModelAndView modelAndView = new ModelAndView("employee/create");
@@ -146,4 +164,7 @@ public class EmployeeController {
         modelAndView.addObject("message", "Found " + employees.size()+ " record(s)");
         return modelAndView;
     }
+
+
+
 }

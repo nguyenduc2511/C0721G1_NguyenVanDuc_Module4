@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/assert/bootstrap413/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assert/datatables/css/dataTables.bootstrap4.min.css">
+    <title>Fukama</title>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-11">
+            <div class="container-fluid">
+                <div class="row m-4 d-flex">
+                    <div class="col-12">
+                        <h3>Create new user</h3>
+                    </div>
+                </div>
+                <div class="row m-4 d-flex">
+                    <div class="col-5">
+                        <a th:href="@{/login}" class="btn btn-success">
+                            Back to login
+                        </a>
+                    </div>
+                </div>
+                <div class="row m-4 d-flex">
+                    <div class="col-6">
+                        <form th:action="@{/saveuser}" th:object="${user}" method="post">
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <label for="userName" class="form-label">Username: </label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="text" class="form-control" id="userName" th:field="*{username}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <label for="userPassword" class="form-label">Password: </label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="password" class="form-control" id="userPassword" th:field="*{password}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-3"></div>
+                                    <div class="col-4">
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div th:replace="/common-layout :: footer"></div>-->
+</body>
+</html>

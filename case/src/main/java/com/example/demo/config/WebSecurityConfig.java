@@ -21,7 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private MyUserDetailServiceImpl myUserDetailService;
 
-//    @Bean
+    //    @Bean
 //    public BCryptPasswordEncoder bCryptPasswordEncoder() {
 //        return new BCryptPasswordEncoder();
 //    }
@@ -39,6 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(myUserDetailService).passwordEncoder(passwordEncoder());
     }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
@@ -47,7 +48,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/home").permitAll()
-                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/");
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/")
+                .and().authorizeRequests().antMatchers("/employee/list", "/customer/list", "/service/list", "/contract/list").hasAnyRole("EMPLOYEE", "DIRECTOR", "MANAGER")
+                .and()
+                .authorizeRequests().antMatchers("/employee/create", "/employee/save", "/employee/edit/**", "/employee/edit", "/employee/delete",
+                "/customer/create", "/customer/save", "/customer/edit/**", "/customer/edit", "/customer/delete",
+                "/service/create", "/service/save", "/service/delete",
+                "/contract/create", "/contract/save", "/contract/contract-detail/create", "/contract/contract-detail/save")
+                .hasAnyRole("DIRECTOR", "MANAGER").and().exceptionHandling().accessDeniedPage("/403");
+
         http.authorizeRequests().and().rememberMe()
                 .tokenRepository(this.persistentTokenRepository()).tokenValiditySeconds(60);
     }
